@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Protections;
+using dnlib.DotNet.Emit;
 
 namespace ConfuserexUnpacker
 {
@@ -45,6 +46,7 @@ namespace ConfuserexUnpacker
             Console.WriteLine("[!] Anti Tamper");
             Protections.AntiTamper.Run(ref MainModule);
 
+            Console.WriteLine("[!] Control Flow Run");
             Protections.ControlFlowRun.cleaner(MainModule);
             try
             {
@@ -52,6 +54,7 @@ namespace ConfuserexUnpacker
                 int amountProxy = ProxyCalls.Execute();
                 Console.WriteLine("[!] Amount Of Proxy Calls Fixed: " + amountProxy);
 
+                Console.WriteLine("[!] Control Flow Run Again");
                 Protections.ControlFlowRun.cleaner(MainModule);
 
                 Console.WriteLine("[!] Decrytping Resources");
@@ -60,6 +63,9 @@ namespace ConfuserexUnpacker
                 Console.WriteLine("[!] Decrytping Strings");
                 int strings = Protections.StaticStrings.Run(MainModule);
                 Console.WriteLine("[!] Amount Of Strings Decrypted: " + strings);
+
+                Console.WriteLine("[!] Anti Debug");
+                Protections.AntiDebug.Run(MainModule);
 
                 return ConfuserexUnpacker.Program.MainModule;
             }
