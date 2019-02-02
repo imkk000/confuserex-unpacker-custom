@@ -180,7 +180,7 @@ namespace Protections
                                 }
 
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
 
                             }
@@ -408,7 +408,7 @@ namespace Protections
             byte_0 = smethod_0(array4);
         }
 
-       
+
         internal static byte[] smethod_0(byte[] byte_1)
         {
             MemoryStream memoryStream = new MemoryStream(byte_1);
@@ -905,7 +905,7 @@ namespace Protections
                     {
                         num = (num << 1 | this.struct0_0[(int)((UIntPtr)num)].method_1(class0_0));
                     }
-                    IL_5E:
+                IL_5E:
                     return (byte)num;
                 }
 

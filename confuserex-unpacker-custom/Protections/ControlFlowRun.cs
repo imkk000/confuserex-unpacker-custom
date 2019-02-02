@@ -76,10 +76,10 @@ namespace Protections
                             Console.Write("Cleaning Control Flow for " + methods.FullName + "\nThe case order is: ");
                             Console.ForegroundColor = ConsoleColor.Green;
                         }
-                            
-                        
+
+
                         DeobfuscateCflow(methods);
-                        if(ConfuserexUnpacker.Program.veryVerbose)
+                        if (ConfuserexUnpacker.Program.veryVerbose)
                             Console.WriteLine();
                     }
 

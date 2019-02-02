@@ -13,14 +13,14 @@ namespace Protections
     class AntiTamper
     {
         public string DirectoryName = "";
-       
+
         private static MethodDef antitamp;
         private static uint[] arrayKeys;
         private static byte[] byteResult;
         private static MethodDef cctor;
         private static List<Instruction> dynInstr;
         private static uint[] initialKeys;
-       
+
         private static BinaryReader reader;
         private static MemoryStream input;
         public static ModuleDefMD UnAntiTamper(ModuleDefMD module, byte[] rawbytes)
@@ -65,7 +65,7 @@ namespace Protections
         {
             var sections = module.MetaData.PEImage.ImageSectionHeaders;
 
-            
+
 
             foreach (var section in sections)
             {
@@ -185,5 +185,28 @@ namespace Protections
             }
         }
 
+        public static void Run(ref ModuleDefMD module)
+        {
+            if (Protections.AntiTamper.IsTampered(module) == true)
+            {
+                Console.WriteLine("[!] Anti Tamper Detected");
+
+                byte[] rawbytes = null;
+
+                var htdgfd = (module).MetaData.PEImage.CreateFullStream();
+
+                rawbytes = htdgfd.ReadBytes((int)htdgfd.Length);
+                try
+                {
+                    module = Protections.AntiTamper.UnAntiTamper(module, rawbytes);
+                    Console.WriteLine("[!] Anti Tamper Removed Successfully");
+                }
+                catch
+                {
+                    Console.WriteLine("[!] Anti Tamper Failed To Remove");
+                }
+
+            }
+        }
     }
 }

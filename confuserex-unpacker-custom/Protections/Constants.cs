@@ -14,21 +14,21 @@ namespace Protections
         {
             int amount = 0;
             var manifestModule = ConfuserexUnpacker.Program.asm.ManifestModule;
-            foreach(TypeDef types in ConfuserexUnpacker.Program.module.GetTypes())
+            foreach (TypeDef types in ConfuserexUnpacker.Program.MainModule.GetTypes())
             {
-                foreach(MethodDef methods in types.Methods)
+                foreach (MethodDef methods in types.Methods)
                 {
                     if (!methods.HasBody) continue;
-                    for(int i = 0; i < methods.Body.Instructions.Count; i++)
+                    for (int i = 0; i < methods.Body.Instructions.Count; i++)
                     {
-                        if(methods.Body.Instructions[i].OpCode == OpCodes.Call && methods.Body.Instructions[i].Operand.ToString().Contains("tring>")&&methods.Body.Instructions[i].Operand is MethodSpec)
+                        if (methods.Body.Instructions[i].OpCode == OpCodes.Call && methods.Body.Instructions[i].Operand.ToString().Contains("tring>") && methods.Body.Instructions[i].Operand is MethodSpec)
                         {
                             if (methods.Body.Instructions[i - 1].IsLdcI4())
                             {
                                 MethodSpec methodSpec = methods.Body.Instructions[i].Operand as MethodSpec;
 
                                 uint param1 = (uint)methods.Body.Instructions[i - 1].GetLdcI4Value();
-                                var value = (string)manifestModule.ResolveMethod(methodSpec.MDToken.ToInt32()).Invoke(null,new object[] {(uint) param1 });
+                                var value = (string)manifestModule.ResolveMethod(methodSpec.MDToken.ToInt32()).Invoke(null, new object[] { (uint)param1 });
                                 methods.Body.Instructions[i].OpCode = OpCodes.Nop;
                                 methods.Body.Instructions[i - 1].OpCode = OpCodes.Ldstr;
                                 methods.Body.Instructions[i - 1].Operand = value;
