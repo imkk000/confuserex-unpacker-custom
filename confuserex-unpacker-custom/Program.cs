@@ -16,8 +16,6 @@ namespace ConfuserexUnpacker
         public static ModuleDefMD MainModule;
         public static Assembly asm;
 
-        public static bool veryVerbose = false;
-
         static void Main(string[] args)
         {
             if (args.Length == 0)

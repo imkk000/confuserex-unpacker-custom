@@ -33,12 +33,6 @@ namespace Protections
                                 methods.Body.Instructions[i - 1].OpCode = OpCodes.Ldstr;
                                 methods.Body.Instructions[i - 1].Operand = value;
                                 amount++;
-                                if (ConfuserexUnpacker.Program.veryVerbose)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Cyan;
-                                    Console.WriteLine(string.Format("Encrypted String Found In Method {0} With Param of {1} the decrypted string is {2}", methods.Name, param1.ToString(), value));
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                }
                             }
                         }
                     }

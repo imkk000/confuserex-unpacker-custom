@@ -79,20 +79,13 @@ namespace Protections
             {
                 if (method.Body.Instructions[y].OpCode == OpCodes.Call)
                 {
-
                     C.Add(method.Body.Instructions[y]);
-
-
-
                 }
 
             }
             return SortList();
-
-
-
-
         }
+
         public static bool SortList()
         {
             var dgrfs = "System.Reflection.Assembly System.Reflection.Assembly::Load(System.Byte[])";
@@ -169,24 +162,15 @@ namespace Protections
                                         method.Body.Instructions[i].OpCode = OpCodes.Nop;
                                         method.Body.Instructions[i - 1].OpCode = OpCodes.Ldstr;
                                         method.Body.Instructions[i - 1].Operand = DecryptedStringValue;
-                                        if (ConfuserexUnpacker.Program.veryVerbose)
-                                        {
-                                            Console.ForegroundColor = ConsoleColor.Cyan;
-                                            Console.WriteLine(string.Format("Encrypted String Found In Method {0} With Param of {1} the decrypted string is {2}", method.Name, param.ToString(), DecryptedStringValue));
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                        }
                                         StringsDecrypted++;
                                     }
                                 }
 
                             }
-                            catch (Exception ex)
+                            catch
                             {
 
                             }
-
-
-
                         }
                     }
 
