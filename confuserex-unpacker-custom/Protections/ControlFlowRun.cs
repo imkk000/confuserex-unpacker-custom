@@ -42,11 +42,6 @@ namespace Protections
                 IList<ExceptionHandler> exceptionHandlers;
                 blocks.GetCode(out instructions, out exceptionHandlers);
                 DotNetUtils.RestoreBody(meth, instructions, exceptionHandlers);
-
-
-
-
-
             }
         }
         public static bool hasCflow(dnlib.DotNet.MethodDef methods)
@@ -76,15 +71,10 @@ namespace Protections
                             Console.Write("Cleaning Control Flow for " + methods.FullName + "\nThe case order is: ");
                             Console.ForegroundColor = ConsoleColor.Green;
                         }
-
-
                         DeobfuscateCflow(methods);
                         if (ConfuserexUnpacker.Program.veryVerbose)
                             Console.WriteLine();
                     }
-
-
-
                 }
             }
         }

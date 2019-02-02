@@ -76,10 +76,8 @@
     <Compile Include="Protections\Constants.cs" />
     <Compile Include="Protections\ControlFlow.cs" />
     <Compile Include="Protections\ControlFlowRun.cs" />
-    <Compile Include="Protections\Lzma.cs" />
-    <Compile Include="Protections\Packer.cs" />
     <Compile Include="Protections\ProxyCalls.cs" />
-    <Compile Include="Protections\StaticPacker.cs" />
+    <Compile Include="Protections\ResourceDecrypt.cs" />
     <Compile Include="Protections\StaticStrings.cs" />
   </ItemGroup>
   <ItemGroup>

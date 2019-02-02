@@ -56,9 +56,13 @@ namespace ConfuserexUnpacker
 
                 Protections.ControlFlowRun.cleaner(MainModule);
 
+                Console.WriteLine("[!] Decrytping Resources");
+                Protections.ResourceDecrypt.Run(MainModule);
+
                 Console.WriteLine("[!] Decrytping Strings");
                 int strings = Protections.StaticStrings.Run(MainModule);
                 Console.WriteLine("[!] Amount Of Strings Decrypted: " + strings);
+
                 return ConfuserexUnpacker.Program.MainModule;
             }
             catch

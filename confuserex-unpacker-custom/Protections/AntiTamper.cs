@@ -199,7 +199,6 @@ namespace Protections
                 try
                 {
                     module = Protections.AntiTamper.UnAntiTamper(module, rawbytes);
-                    Console.WriteLine("[!] Anti Tamper Removed Successfully");
                 }
                 catch
                 {
