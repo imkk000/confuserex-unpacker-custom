@@ -28,7 +28,7 @@ namespace ConfuserexUnpacker
             ModuleDefMD module = RunScript(path);
 
             ModuleWriterOptions writerOptions = new ModuleWriterOptions(module);
-            writerOptions.MetaDataOptions.Flags |= MetaDataFlags.PreserveAll;
+            writerOptions.MetadataOptions.Flags |= MetadataFlags.PreserveAll;
             writerOptions.Logger = DummyLogger.NoThrowInstance;
 
             module.Write(path + "Cleaned.exe", writerOptions);
