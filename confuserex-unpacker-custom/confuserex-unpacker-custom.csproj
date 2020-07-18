@@ -54,11 +54,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="de4dot.blocks">
-      <HintPath>..\..\ConfuserEx-Unpacker\de4dot\Debug\bin\de4dot.blocks.dll</HintPath>
+    <Reference Include="de4dot.blocks, Version=3.1.41592.3405, Culture=neutral, PublicKeyToken=d3f3ed1e47f67fc6, processorArchitecture=MSIL">
+      <HintPath>..\packages\de4dot.blocks.3.2.0\lib\de4dot.blocks.dll</HintPath>
     </Reference>
-    <Reference Include="dnlib">
-      <HintPath>..\..\ConfuserEx-Unpacker\dnlib\Debug\bin\dnlib.dll</HintPath>
+    <Reference Include="dnlib, Version=3.3.2.0, Culture=neutral, PublicKeyToken=50e96378b6e77999, processorArchitecture=MSIL">
+      <HintPath>..\packages\dnlib.3.3.2\lib\net45\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
