@@ -26,13 +26,19 @@ namespace ConfuserexUnpacker
 
             string path = args[0];
             ModuleDefMD module = RunScript(path);
+            if (module == null)
+            {
+                Console.WriteLine("[x] Could not load module: " + path);
+                return;
+            }
 
             ModuleWriterOptions writerOptions = new ModuleWriterOptions(module);
             writerOptions.MetadataOptions.Flags |= MetadataFlags.PreserveAll;
             writerOptions.Logger = DummyLogger.NoThrowInstance;
 
-            module.Write(path + "Cleaned.exe", writerOptions);
-            Console.ReadLine();
+            string outPath = path + "Cleaned.exe";
+            module.Write(outPath, writerOptions);
+            Console.WriteLine("[+] Wrote " + outPath);
         }
 
         static ModuleDefMD RunScript(string path)
@@ -48,30 +54,33 @@ namespace ConfuserexUnpacker
 
             Console.WriteLine("[!] Control Flow Run");
             Protections.ControlFlowRun.cleaner(MainModule);
-            try
+            Safe("Proxy Calls", delegate
             {
-                Console.WriteLine("[!] Proxy Calls");
                 int amountProxy = ProxyCalls.Execute();
                 Console.WriteLine("[!] Amount Of Proxy Calls Fixed: " + amountProxy);
-
-                Console.WriteLine("[!] Control Flow Run Again");
-                Protections.ControlFlowRun.cleaner(MainModule);
-
-                Console.WriteLine("[!] Decrytping Resources");
-                Protections.ResourceDecrypt.Run(MainModule);
-
-                Console.WriteLine("[!] Decrytping Strings");
+            });
+            Safe("Control Flow Run Again", delegate { Protections.ControlFlowRun.cleaner(MainModule); });
+            Safe("Decrypting Resources", delegate { Protections.ResourceDecrypt.Run(MainModule); });
+            Safe("Decrypting Strings", delegate
+            {
                 int strings = Protections.StaticStrings.Run(MainModule);
                 Console.WriteLine("[!] Amount Of Strings Decrypted: " + strings);
+            });
+            Safe("Anti Debug", delegate { Protections.AntiDebug.Run(MainModule); });
 
-                Console.WriteLine("[!] Anti Debug");
-                Protections.AntiDebug.Run(MainModule);
+            return ConfuserexUnpacker.Program.MainModule;
+        }
 
-                return ConfuserexUnpacker.Program.MainModule;
-            }
-            catch
+        static void Safe(string name, Action action)
+        {
+            Console.WriteLine("[!] " + name);
+            try
             {
-                return null;
+                action();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[x] " + name + " failed: " + ex.GetType().Name + ": " + ex.Message);
             }
         }
     }

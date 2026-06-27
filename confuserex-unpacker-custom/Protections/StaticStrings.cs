@@ -45,7 +45,8 @@ namespace Protections
                     {
                         if (method.Body.Instructions[i].OpCode == OpCodes.Call)
                         {
-                            MethodDef initMethod = (MethodDef)method.Body.Instructions[i].Operand;
+                            MethodDef initMethod = method.Body.Instructions[i].Operand as MethodDef;
+                            if (initMethod == null) continue;
                             if (!initMethod.HasBody) continue;
                             if (initMethod.Body.Instructions.Count < 300) continue;
                             for (int y = 0; y < initMethod.Body.Instructions.Count; y++)
@@ -112,7 +113,8 @@ namespace Protections
                     {
                         if (method.Body.Instructions[i].OpCode == OpCodes.Call)
                         {
-                            MethodDef initMethod = (MethodDef)method.Body.Instructions[i].Operand;
+                            MethodDef initMethod = method.Body.Instructions[i].Operand as MethodDef;
+                            if (initMethod == null) continue;
                             if (!(initMethod == correct)) continue;
                             for (int y = 0; y < initMethod.Body.Instructions.Count; y++)
                             {
@@ -243,7 +245,8 @@ namespace Protections
                     {
                         if (method.Body.Instructions[i].OpCode == OpCodes.Call)
                         {
-                            MethodDef initMethod = (MethodDef)method.Body.Instructions[i].Operand;
+                            MethodDef initMethod = method.Body.Instructions[i].Operand as MethodDef;
+                            if (initMethod == null) continue;
                             if (!(initMethod == correct)) continue;
                             for (int y = 0; y < initMethod.Body.Instructions.Count; y++)
                             {
@@ -286,7 +289,8 @@ namespace Protections
                     {
                         if (method.Body.Instructions[i].OpCode == OpCodes.Call)
                         {
-                            MethodDef initMethod = (MethodDef)method.Body.Instructions[i].Operand;
+                            MethodDef initMethod = method.Body.Instructions[i].Operand as MethodDef;
+                            if (initMethod == null) continue;
                             if (!(initMethod == correct)) continue;
                             for (int y = 0; y < initMethod.Body.Instructions.Count; y++)
                             {

@@ -222,7 +222,7 @@ namespace Protections
                     {
                         manifestResourceStream.CopyTo(memoryStream);
                         byte[] data = memoryStream.ToArray();
-                        module.Resources.Add(new EmbeddedResource(text, data, ManifestResourceAttributes.Public));
+                        module.Resources.Add(new EmbeddedResource(text, data, dnlib.DotNet.ManifestResourceAttributes.Public));
                     }
                 }
             }
