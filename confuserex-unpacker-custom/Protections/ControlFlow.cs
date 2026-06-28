@@ -15,9 +15,6 @@ namespace Protections
     {
         private Block switchBlock;
         private Local localSwitch;
-        private bool native;
-        private bool isolder;
-        public MethodDef currentMethod;
         protected override bool Deobfuscate(Block block)
         {
 
@@ -256,7 +253,6 @@ namespace Protections
             if (block.FirstInstr.OpCode != OpCodes.Call)
                 return;
             switchBlock = block;
-            native = true;
 
             //set the local to a variable to compare to later
             localSwitch = Instr.GetLocalVar(allVars, block.Instructions[block.Instructions.Count - 4]);
@@ -269,7 +265,6 @@ namespace Protections
             if (!block.FirstInstr.IsLdcI4())
                 return;
             //check to see if its confuserex switch block
-            isolder = true;
             switchBlock = block;
             //set the local to a variable to compare to later
             //  localSwitch = Instr.GetLocalVar(allVars, block.Instructions[block.Instructions.Count - 4]);
@@ -282,9 +277,7 @@ namespace Protections
             if (block.FirstInstr.OpCode != OpCodes.Call)
                 return;
             //check to see if its confuserex switch block
-            isolder = true;
             switchBlock = block;
-            native = true;
             //set the local to a variable to compare to later
             //  localSwitch = Instr.GetLocalVar(allVars, block.Instructions[block.Instructions.Count - 4]);
             return;
@@ -296,7 +289,6 @@ namespace Protections
             if (!block.FirstInstr.IsStloc())
                 return;
             //check to see if its confuserex switch block
-            isolder = true;
             switchBlock = block;
             //set the local to a variable to compare to later
             //  localSwitch = Instr.GetLocalVar(allVars, block.Instructions[block.Instructions.Count - 4]);
